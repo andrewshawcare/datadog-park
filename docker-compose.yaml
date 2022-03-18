@@ -1,0 +1,22 @@
+version: '3'
+services:
+  datadog-agent:
+    image: datadog/agent
+    env_file: .env.datadog-agent
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+  kafka:
+    build: kafka
+    ports:
+      - '9091:9091'
+  producer:
+    build: ./producer
+    labels:
+      com.datadoghq.ad.logs: '[{"source": "java", "service": "com.andrewshawcare.datadog-park.producer"}]'
+    env_file: .env.producer
+  consumer:
+    build: ./consumer
+    labels:
+      com.datadoghq.ad.logs: '[{"source": "python", "service": "com.andrewshawcare.datadog-park.consumer"}]'
+    env_file: .env.consumer
