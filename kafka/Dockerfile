@@ -1,11 +1,11 @@
 FROM openjdk:17
 
-ENV KAFKA_VERSION=3.1.0
+ENV KAFKA_VERSION=3.4.0
 ENV KAFKA_SCALA_VERSION=2.13
 RUN \
-  curl https://dlcdn.apache.org/kafka/${KAFKA_VERSION}/kafka_${KAFKA_SCALA_VERSION}-${KAFKA_VERSION}.tgz \
-    --location \
-    --output /kafka.tgz \
+  curl https://downloads.apache.org/kafka/${KAFKA_VERSION}/kafka_${KAFKA_SCALA_VERSION}-${KAFKA_VERSION}.tgz \
+  --location \
+  --output /kafka.tgz \
   && tar -xzf /kafka.tgz \
   && rm /kafka.tgz
 
